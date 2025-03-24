@@ -67,3 +67,109 @@ tsc -v
 ## Read the documentation.
 
 ### Read only basics like how many types are there..
+
+## Main concepts in Ts.
+
+### 1. Type inference
+
+Typescript is smart enough to detect which data type you want to assign to a variable.
+**So instead of always mentioning the type while assigning the value, you can actually write it in Js manner**
+
+_Below code..._
+
+```javascript
+let userID: number = 5363;
+
+// Dont need this,
+
+let userID = 5363;
+// here, Ts will detect automatically and prevent from assigning different type.
+```
+
+![alt text](image-4.png)
+
+**Here below, where should we explicitly declare its type**
+_here comes `any` keyword.._
+
+![alt text](image-5.png)
+
+here, we should explicitly assign the type because we dont know what it going to be n future.
+_if we not mention its type explicitly, it will take all types to anywhere.._
+
+![alt text](image-6.png)
+
+### 2. Any keyword
+
+`Any` keyword is actaully used when we dont want **type checking** for that part of code.
+\*We can say, we actually off the type checking of Ts for that part of code **which sometimes we need to..\***
+
+### 3. Functions in Ts
+
+**Functions in Typescript should be in Type checking mode always.**
+Otherwise these could happen..
+
+![alt text](image-7.png)
+
+_The correct code is below.._
+
+![alt text](image-8.png)
+
+**Another IMP concepts while writing functions in Ts**
+We know about basic that it should take argument and check its type but what about type it going to return.
+
+_See the incorrect code below.._
+
+![alt text](image-9.png)
+the above function should be return the number but it's returning string, which is not good.
+
+_mentioning type after argument brackets_
+![alt text](image-10.png)
+
+How to avoid these..
+![alt text](image-11.png)
+
+### These could be happen in Ts
+
+**Sometimes we actually need to return multiple types.**
+_see the two code snippet below._
+![alt text](image-12.png)
+
+<hr>
+
+![alt text](image-13.png)
+
+### `never` and `void` keyword
+
+1. TypeScript void Function
+
+Void type does not return anything. Just do the process if there.
+**So, its return type is `void`.**
+
+```typescript
+function greet(name: string): void {
+  console.log(`Hello, ${name}!`);
+}
+
+greet("GeeksforGeeks");
+```
+
+Output -
+
+```
+Hello, GeeksforGeeks!
+```
+
+2. never in Typecript
+   Used when function never returns.
+
+**usually for errors and infinite loops.**
+
+```typescript
+function throwError(): never {
+  throw new Error("Something went wrong!");
+}
+```
+
+✅ throwError function never returns anything because it always throws an error.
+
+![alt text](image-14.png)

@@ -1,3 +1,11 @@
-let greetings: string = "hello world";
-let myName: string = "swayam";
-console.log(myName);
+// any keyword
+
+let hero;
+
+function getHero() {
+  return true || "Thor";
+}
+
+hero = getHero();
+
+export {};
