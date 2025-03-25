@@ -107,6 +107,7 @@ _if we not mention its type explicitly, it will take all types to anywhere.._
 
 **Functions in Typescript should be in Type checking mode always.**
 Otherwise these could happen..
+always mention type returning value.
 
 ![alt text](image-7.png)
 
