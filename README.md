@@ -174,3 +174,259 @@ function throwError(): never {
 ✅ throwError function never returns anything because it always throws an error.
 
 ![alt text](image-14.png)
+
+### IMP NOTES (Parameter and Argument)
+
+![alt text](image-15.png)
+
+### Type alias
+
+**Type Alias is used to create a custom name for a type. This makes your code more readable and reusable.**
+It is actually used to improve code readability and for avoiding writing complex type definations multiple times.
+
+We use the `type` keyword to create a Type Alias.
+
+```typescript
+type MyType = string; // Now, 'MyType' is an alias for 'string'
+
+let username: MyType = "Shubham";
+```
+
+**Another Usecase**
+
+```typescript
+type User = {
+  name: string;
+  age: number;
+  email: string;
+  isActive: boolean;
+};
+
+function createUser(user: User) {}
+
+createUser({ name: "s", age: 67, email: "mail", isActive: true });
+```
+
+### `readonly` keyword, `?` & use case scenario (scenorio based).
+
+1. `readonly` keyword
+
+Whenever we have type alias, which we used in most real world cases where there would be unique _ID_.
+
+below is example,
+
+**`readonly` actually dont allow us reassign the value of that particular property.**
+
+![alt text](image-17.png)
+
+2. `?` literal
+
+It is actually used when we define the type in while type alias and sometimes there is case when we did not need all data of user or get data while keeping some optional.
+
+eg. there is these obj where properties are `name`, `email` & `creditCard`. so there will chance that our customer is free user not premium meaning credit card data is not going to be there.
+
+**see the code below, you will get it.**
+
+![alt text](image-18.png)
+
+**But as soon as i put `?` after `creditCard`** , it will not show error because sometimes there creditCard detail wont be there & sometimes it will be there and can happen while passing this obj to a function for further process.
+
+![alt text](image-19.png)
+
+3. We can actually combine many type into one type.
+
+```typescript
+type cardNumber = {
+  cardNumber: number;
+};
+
+type cardDate = {
+  cardDate: number;
+};
+
+// merge two type into one
+type cardDetails = cardDate &
+  cardNumber & {
+    cvv: number;
+  };
+```
+
+**In real when some other have already have type and working well, if you want to add new, so you do this.**
+
+### Array in Typescript
+
+![alt text](image-20.png)
+
+This is not way of creating array in Ts.
+
+**This is correct way**
+
+![alt text](image-21.png)
+
+**Or another way is below**
+
+```typescript
+const myHeroes: Array<number> = [];
+```
+
+**Another real world use case**
+
+_Below code is there when we have to store **objects** in an Array._
+(type alias based)
+
+```typescript
+type User = {
+  name: string;
+  isActive: boolean;
+};
+
+const allUsers: User[] = [];
+
+// now we can append the objects in an array
+
+allUsers.push({ name: "shubham", isActive: true });
+```
+
+<hr>
+
+**When dealing with MLmodels there will be different syntax we should know.(python based).**
+
+_actually nested array, we can say???_
+
+![alt text](image-22.png)
+
+### Union type in Ts.
+
+It is actually combining data types and use it.
+
+_have a look at myUnion.ts file._
+
+```typescript
+let score: number | string = 674;
+
+score = "shubham"; // No Error :)
+
+// lets say we're building an application where user can be user or admin.
+
+type User = {
+  name: string;
+  id: number;
+};
+
+type Admin = {
+  username: string;
+  adminId: number;
+};
+
+// inially user was normal user
+let shubham: User | Admin = {
+  name: "Tom",
+  id: 101,
+};
+
+// Now, it can be change into a admin
+
+shubham = {
+  username: "Shubh",
+  adminId: 67,
+};
+
+export {};
+```
+
+<hr>
+
+**Array with unions where fun begins..**
+
+```typescript
+// Array with unions
+
+const data1: number[] = [1, 2, 4]; // cannot add other types except number.
+
+const data2: string[] = ["1", "3", "57"]; // cannot add other types except string
+
+const data3: string[] | number[] = [5363, 774, 838]; // it will either number array or string array.(not both at same time)
+
+const data4: (string | number | boolean)[] = [1, 2, 3, "shubham", true]; // this is possible only using this syntax.
+```
+
+<hr>
+
+If we building aeroplane app, seat allotement.
+
+**Good for strict and secured apps.**
+
+```typescript
+let seatAllotement: "aisle" | "window" | "middle";
+
+seatAllotement = "aisle"; // no error
+seatAllotement = "middle"; // no error
+seatAllotement = "window"; // no error
+seatAllotement = "crew side"; // Throw error...
+```
+
+### Tuples in Ts.
+
+It is simple as array, here what matters is order. typescript actually put strict order using **tuple**.
+
+```typescript
+let user: (number | string)[] = [1, 2, "s"]; // here order dont matter at all..
+
+// but when we say like
+
+let apiData: [string, number, boolean];
+apiData = ["", 657, true];
+// all correct
+
+apiData = [757, "sh", true]; // throws error.
+```
+
+### Enums in Ts
+
+It actually used to restrict user's choices. lets say, in aeroplane user will only have three choices to book.
+
+1. window
+2. aisle
+3. middle
+
+we can use `enums` to have strong and restrictive choice.
+
+_see the below code_
+
+![alt text](image-23.png)
+
+Eventually we can more choices as filght would be international :)
+
+here, there were number assign them by default. starting from 0 when you hover on them.
+
+we can customize it.
+
+```typescript
+enum Seatchoices {
+  AISLE = 10,
+  MIDDLE, // this will 11
+  WINDOW, // this will 12
+}
+```
+
+<hr>
+
+![alt text](image-25.png)
+
+**IMP**
+Just ask AI, when and why const is used before `enum` keyword.
+
+![alt text](image-24.png)
+
+#### When we use const enum.
+
+```typescript
+const enum SeatChoices {
+  AISLE = 10,
+  MIDDLE,
+  WINDOW,
+}
+
+console.log(SeatChoices.AISLE); // ✅ Still works (Output: 10)
+console.log(SeatChoices[10]); // ❌ ERROR! (Reverse mapping not available)
+```

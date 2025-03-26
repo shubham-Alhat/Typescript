@@ -8,8 +8,8 @@ function createUser({ name: string, isPaid: boolean }) {
   return true;
 }
 
-createUser({ name: "shubhamAlhat", isPaid: false });
+const newUser = { name: "shubham", isPaid: true, email: "swayam@mail.com" };
 
-function createCourse(): {} {
-  return { name: "hitesh", age: 21 };
-}
+createUser(newUser);
+
+export {};
