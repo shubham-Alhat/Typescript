@@ -430,3 +430,93 @@ const enum SeatChoices {
 console.log(SeatChoices.AISLE); // ✅ Still works (Output: 10)
 console.log(SeatChoices[10]); // ❌ ERROR! (Reverse mapping not available)
 ```
+
+### Interfaces in Typescript.
+
+An interface in TypeScript is a way to define a contract for an object. It ensures that an object has specific properties and methods with the correct types.
+
+```typescript
+interface User {
+  readonly passcode: number;
+  email: string;
+  userID: string;
+  googleID?: number;
+  // startTrial: () => string;    // first method
+  startTrial(): string; // it is method and it is going to return string.
+  getDiscount(name: string, discount: number): number;
+}
+
+let shubham: User = {
+  passcode: 354,
+  email: "s@s.com",
+  userID: "shubhamAI",
+  startTrial: () => {
+    return "Started..";
+  },
+  getDiscount: (name: "dhamaka", discount: 46) => {
+    return 4783;
+  },
+};
+```
+
+Here, the User interface ensures that every user object has name, age, and isAdmin properties with correct types.
+
+**For example, we get this above code from github and `User` interface is there. that file are actually distributed everywhere, so we cannot change that interface.**
+In that case, we can make another interface with same name...
+
+_see code below._
+
+```typescript
+interface User {
+  readonly passcode: number;
+  email: string;
+  userID: string;
+  googleID?: number;
+  // startTrial: () => string;    // first method
+  startTrial(): string; // it is method and it is going to return string.
+  getDiscount(name: string, discount: number): number;
+}
+
+// to add github login as well..(reopening of interface)
+interface User {
+  githubID: number;
+}
+
+let shubham: User = {
+  passcode: 354,
+  email: "s@s.com",
+  userID: "shubhamAI",
+  startTrial: () => {
+    return "Started..";
+  },
+  getDiscount: (name: "dhamaka", discount: 46) => {
+    return 4783;
+  },
+  githubID: 1234,
+};
+```
+
+**This is known as `reopening of interface`.**
+
+#### Extending Interfaces → Interfaces can inherit properties from other interfaces for flexibility.
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Employee extends Person {
+  role: string;
+}
+
+const emp: Employee = { name: "Swayam", age: 20, role: "Developer" };
+```
+
+### Interface V/S Type
+
+![alt text](image-26.png)
+
+![alt text](image-27.png)
+
+<hr>
